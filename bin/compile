@@ -183,12 +183,12 @@ status "Pruning cached dependencies not specified in package.json"
 npm prune 2>&1 | indent
 
 status "Pruning cached bower dependencies not specified in bower.json"
-bower prune 2>&1 | indent
+$build_dir/node_modules/bower/bin/bower prune 2>&1 | indent
 
 status "Installing dependencies"
 # Make npm output to STDOUT instead of its default STDERR
 npm install --quiet --no-optional --userconfig $build_dir/.npmrc 2>&1 | indent
-bower install --quiet | indent
+$build_dir/node_modules/bower/bin/bower install --quiet | indent
 
 # Add the project's and ember-cli's dependencies' binaries to the PATH
 PATH=$build_dir/node_modules/.bin:$build_dir/node_modules/ember-cli/node_modules/.bin:$PATH
